@@ -1,2 +1,7 @@
-# HeavenStresser
-Heaven Stressor &lt; Updates coming soon?
+# Stressor Tool
+
+This tool was primarily designed to test websites. However, much of the code is either incomplete or not functioning as intended. ( MC Method and Random Packets
+
+At the moment, I have limited interest in this project, but I may release some updates in the future. Because of this, I'm providing the full source code. However, I'm not entirely sure which version this is, so if you encounter any issues, feel free to report them! Thanks.
+
+( Full Version in Releases )
