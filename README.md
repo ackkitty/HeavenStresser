@@ -9,3 +9,14 @@ At the moment, I have limited interest in this project, but I may release some u
 
 please use it only for eductional things >.<
 #happytobeaskid
+
+
+# HTTP
+java -jar --enable-preview (Name).jar -targets ip:port -hostname ip -method http -version 1.1 -requests 1024 -type get -processors 1 -duration 1 -connections 1
+
+
+# MC METHOD
+java -jar (Name).jar -targets ip:port -method mc -type login -version 1.8 -hostname ip -processors 1 -connections 1 -duration 10
+
+# RANDOM PACKET
+java -jar --enable-preview (Name).jar -targets ip:port -hostname ip -method random-packet -size <1 to 65535> -processors 1 -duration 1 -connections 1
