@@ -20,3 +20,11 @@ java -jar (Name).jar -targets ip:port -method mc -type login -version 1.8 -hostn
 
 # RANDOM PACKET
 java -jar --enable-preview (Name).jar -targets ip:port -hostname ip -method random-packet -size <1 to 65535> -processors 1 -duration 1 -connections 1
+
+# INSTALLATION
+1. Download Java 21 ( https://www.oracle.com/de/java/technologies/downloads/#java21 )
+2. Set java 21 as Standard Java Version ( setx JAVA_HOME "C:\Program Files\Java\jdk-21", setx PATH "%PATH%;C:\Program Files\Java\jdk-21\bin" )
+3. Open CMD and run one of the Methods that i have pasted above.
+
+
+If you need any Help you can add me on Discord: ack_cat
