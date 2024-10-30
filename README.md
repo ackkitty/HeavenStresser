@@ -19,7 +19,7 @@ java -jar --enable-preview (Name).jar -targets ip:port -hostname ip -method http
 java -jar (Name).jar -targets ip:port -method mc -type login -version 1.8 -hostname ip -processors 1 -connections 1 -duration 10
 
 # RANDOM PACKET
-java -jar --enable-preview (Name).jar -targets ip:port -hostname ip -method random-packet -size <1 to 65535> -processors 1 -duration 1 -connections 1
+java -jar --enable-preview (Name).jar -targets ip:port -hostname ip -method random-packet -size <1 to 65535> -processors 1 -duration 1 -connections 1 -fragmentation true/false
 
 # INSTALLATION
 1. Download Java 21 ( https://www.oracle.com/de/java/technologies/downloads/#java21 )
