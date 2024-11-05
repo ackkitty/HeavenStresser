@@ -27,4 +27,4 @@ java -jar --enable-preview (Name).jar -targets ip:port -hostname ip -method rand
 3. Open CMD and run one of the Methods that i have pasted above.
 
 
-If you need any Help you can add me on Discord: ack_cat
+If you need any Help you can add me on Discord: ack_cat or interpol.de
